@@ -1,7 +1,7 @@
 # Use the official RStudio Plumber image
 FROM rstudio/plumber:latest
 
-# Install system dependencies required for igraph/ggraph/ragg
+# Install required system dependencies for R packages and plotting
 RUN apt-get update -y && apt-get install -y \
     libcurl4-openssl-dev \
     libssl-dev \
@@ -9,6 +9,10 @@ RUN apt-get update -y && apt-get install -y \
     libpng-dev \
     libglpk40 \
     libglpk-dev \
+    libwebp-dev \
+    libtiff-dev \
+    libjpeg-dev \
+    libfontconfig1-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements.R and install R packages
