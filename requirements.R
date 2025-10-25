@@ -1,0 +1,10 @@
+install.packages(c(
+  "plumber",
+  "readr",
+  "dplyr",
+  "ggraph",
+  "tidygraph",
+  "igraph",
+  "ragg",
+  "ggrepel"
+))
