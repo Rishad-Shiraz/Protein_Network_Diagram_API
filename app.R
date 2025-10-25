@@ -35,7 +35,7 @@ function(req, res) {
 
   # Save plot directly to PNG
   tmp_png <- tempfile(fileext = ".png")
-  agg_png(tmp_png, width = 2000, height = 1500, res = 300)
+  agg_png(tmp_png, width = 2000, height = 1500, res = 150)
 
   ggraph(g, layout = layout) +
     geom_edge_fan(alpha = 0.5) +
