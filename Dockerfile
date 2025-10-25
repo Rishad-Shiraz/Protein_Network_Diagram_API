@@ -1,4 +1,3 @@
- Dockerfile
 FROM rocker/plumber:latest
 
 # Install system dependencies required for building some R packages (ragg, ggraph, etc.)
