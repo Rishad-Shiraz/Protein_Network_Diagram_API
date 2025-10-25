@@ -1,23 +1,24 @@
-FROM rocker/plumber:latest
+FROM rstudio/plumber:latest
 
-# Install system dependencies required for building some R packages (ragg, ggraph, etc.)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libxml2-dev libssl-dev libcurl4-openssl-dev \
-    libfontconfig1-dev libfreetype6-dev libharfbuzz-dev libfribidi-dev \
-    libpng-dev libjpeg-dev libcairo2-dev \
-  && rm -rf /var/lib/apt/lists/*
+# Install system dependencies required for building some R packages
+RUN apt-get update -y && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libpng-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy and install R packages
-COPY requirements.R /app/requirements.R
-RUN Rscript /app/requirements.R
+# Copy requirements.R and install R packages
+COPY requirements.R /tmp/requirements.R
+RUN Rscript /tmp/requirements.R
 
-# Copy API
-COPY app.R /app/app.R
+# Set working directory
 WORKDIR /app
+COPY . /app
 
-# Expose port used by plumber
+# Expose Plumber port
 EXPOSE 8000
 
-# Start the API
+# Run the API
 CMD ["Rscript", "app.R"]
 
